@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetworkV1", "SocialNetworkV1\SocialNetworkV1.csproj", "{F65DBCF2-C4F4-4FD0-92C2-6FFF21DD85B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F65DBCF2-C4F4-4FD0-92C2-6FFF21DD85B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F65DBCF2-C4F4-4FD0-92C2-6FFF21DD85B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F65DBCF2-C4F4-4FD0-92C2-6FFF21DD85B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F65DBCF2-C4F4-4FD0-92C2-6FFF21DD85B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE4B1A29-F5BA-4A92-8051-EA1C4C6A319C}
+	EndGlobalSection
+EndGlobal
