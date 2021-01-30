@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Admin.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Exceptions.cs" />
@@ -54,8 +54,9 @@
     <Compile Include="Post.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SocialNetwork.cs" />
+    <Compile Include="ConsoleInterface.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserSide.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

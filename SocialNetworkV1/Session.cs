@@ -2,7 +2,7 @@
 using Exceptions;
 using Network;
 
-namespace Account
+namespace Session
 {
     struct UserCredentials
     {
@@ -16,10 +16,10 @@ namespace Account
         }
     }
 
-    class CreateAccountSession
+    static class CreateAccountSession
     {
-        private string ConfirmationCode { get; set; }
-        public void Registration(ref Database.Database db, ref User.User user)
+        private static string ConfirmationCode { get; set; }
+        public static void Registration(ref Database.Database db, ref User.User user)
         {
             try
             {
@@ -31,13 +31,13 @@ namespace Account
             }
         }
 
-        public void SendConfirmationCode(in string mail)
+        public static void SendConfirmationCode(in string mail)
         {
             ConfirmationCode = Helper.MailHelper.GenerateCode();
             Mail.SendMail(mail, "There is last step to do.", $"Confirmation code is {ConfirmationCode}");
         }
 
-        public bool ConfirmAccount(ref User.User user, in string code)
+        public static bool ConfirmAccount(ref User.User user, in string code)
         {
             if (code == ConfirmationCode)
             {
@@ -56,7 +56,10 @@ namespace Account
 
         public void Login(in Database.Database db, UserCredentials credentials)
         {
-            var user = Array.Find(db.Users, user1 => user1.Username == credentials.Username);
+            User.User user = null;
+
+            if(db.Users != null)
+                user = Array.Find(db.Users, user1 => user1.Username == credentials.Username);
 
             if (user == null)
                 throw new LoginException($"There is no account associated this username -> {credentials.Username}");
@@ -71,6 +74,7 @@ namespace Account
         public void Logout()
         {
             Status = false;
+            User = null;
         }
     }
 }

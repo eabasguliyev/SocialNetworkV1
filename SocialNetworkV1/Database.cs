@@ -115,5 +115,59 @@ namespace Database
 
             Notifications = temp;
         }
+
+        public void ShowAllPosts(bool detail = false)
+        {
+            bool isExist = false;
+
+            if (detail)
+            {
+                foreach (var user in Users)
+                {
+                    if (user.Posts != null)
+                    {
+                        foreach (var userPost in user.Posts)
+                        {
+                            isExist = true;
+                            Console.WriteLine(userPost);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (var user in Users)
+                {
+                    if (user.Posts != null)
+                    {
+                        foreach (var userPost in user.Posts)
+                        {
+                            isExist = true;
+                            userPost.ShortInfo();
+                        }
+                    }
+                }
+            }
+
+            if (!isExist)
+                throw new DatabaseException("There is no post!");
+        }
+
+        public Post.Post GetPost(int id)
+        {
+            foreach (var user in Users)
+            {
+                if (user.Posts != null)
+                {
+                    foreach (var userPost in user.Posts)
+                    {
+                        if (userPost.Id == id)
+                            return userPost;
+                    }
+                }
+            }
+
+            throw new DatabaseException($"There is no post associated this id -> {id}");
+        }
     }
 }

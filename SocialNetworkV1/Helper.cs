@@ -12,29 +12,30 @@ namespace Helper
     {
         public static void ValidateMail(in string mail)
         {
+            try
+            {
+                CheckForbiddenCharacter(mail);
+            }
+            catch (Exception e)
+            { 
+                throw;
+            }
+
             var mailComponents = mail.Split('@');
 
             if (mailComponents.Length != 2)
                 throw new MailFormatException("Mail format is wrong. Try Again!");
-
-            string id = mailComponents[0];
-            string domain = mailComponents[1];
-
-            if (!CheckForbiddenCharacter(id))
-                throw new MailFormatException("Mail can not contain any of this chacarters -> !#$%&*()_+-= ");
-
-            if (!CheckForbiddenCharacter(domain))
-                throw new MailFormatException("Domain address can not contain any of this chacarters -> !#$%&*()_+-= ");
         }
-        public static bool CheckForbiddenCharacter(in string data)
+
+        private static void CheckForbiddenCharacter(in string data)
         {
-            foreach (var @char in "!#$%&*()_+-=")
+            var pattern = "!#$%&*()_+-=";
+            foreach (var @char in pattern)
             {
                 if (data.Contains(@char.ToString()))
-                    return false;
+                    throw new MailFormatException(
+                        $"Mail address can not be contains any of this characters -> {pattern}");
             }
-
-            return true;
         }
 
         public static string GenerateCode()
@@ -47,29 +48,25 @@ namespace Helper
 
     static class UserHelper
     {
-        public static bool CheckForbiddenCharacter(in string data)
+        public static void CheckForbiddenCharacter(in string data)
         {
-            foreach (var @char in "1234567890-=!#$%&*()_+")
+            var pattern = "1234567890-=!#$%&*()_+";
+            foreach (var @char in pattern)
             {
                 if (data.Contains(@char.ToString()))
-                    return false;
+                    throw new UserException($"Name can not be contains any of this characters -> {pattern}");
             }
-
-            return true;
+        }
+        public static void CheckAge(in int age)
+        {
+            if (age < 18)
+                throw new UserException("Age must be minimum 18 years old!");
         }
 
-        public static bool CheckAge(in int age)
+        public static void CheckUsernameLength(in string username)
         {
-            if (age >= 18)
-                return true;
-            return false;
-        }
-
-        public static bool CheckUsernameLength(in string username)
-        {
-            if (username.Length > 5)
-                return true;
-            return false;
+            if (username.Length < 5)
+                throw new UserException("Username length must be minimum 5 characters");
         }
 
         public static void CheckPasswordStrong(in string password)
@@ -89,6 +86,37 @@ namespace Helper
 
             if (notContain)
                 throw new PasswordFormatException("Password must be contain minimum one special character");
+        }
+    }
+
+    static class ConsoleHelper
+    {
+        public static void ClearConsole()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Press enter to continue");
+            Console.ResetColor();
+            Console.ReadLine();
+        }
+
+        public static void ClearConsole(int lineCount, int clearableLine)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Press enter to continue");
+            Console.ResetColor();
+            Console.ReadLine();
+            Console.SetCursorPosition(0, lineCount + clearableLine);
+            for (int i = 0; i < clearableLine; i++)
+            {
+                ClearLastLine();
+            }
+        }
+
+        private static void ClearLastLine()
+        {
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write(new string(' ', Console.BufferWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
         }
     }
 

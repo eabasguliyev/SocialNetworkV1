@@ -8,12 +8,12 @@ namespace Post
 {
     class Post
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public string Username { get; set; }
         public string Content { get; set; }
         public DateTime CreationDate { get; private set; }
-        public int LikeCount { get; set; } = default;
-        public int ViewCount { get; set; } = default;
+        public int LikeCount { get; private set; } = default;
+        public int ViewCount { get; private set; } = default;
 
         private static int CurrentId { get; set; } = default;
 
@@ -29,6 +29,17 @@ namespace Post
             return post;
         }
 
+        public void IncreaseView()
+        {
+            ViewCount++;
+        }
+
+        public void ShortInfo()
+        {
+            Console.WriteLine($"Id: {Id}");
+            Console.WriteLine($"User: {Username}");
+            Console.WriteLine($"Creation Date: {CreationDate:g}");
+        }
         public override string ToString()
         {
             var post = new StringBuilder();

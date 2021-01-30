@@ -43,5 +43,13 @@ namespace Exceptions
             Message = message;
         }
     }
+    class UserException : Exception
+    {
+        public override string Message { get; }
 
+        public UserException(in string message)
+        {
+            Message = message;
+        }
+    }
 }

@@ -2,20 +2,43 @@
 
 namespace SocialNetworkV1
 {
-    static class SocialNetwork
+    enum MainMenuOptions
+    {
+        ADMIN = 1, USER, EXIT
+    }
+
+    enum UserMenuOptions
+    {
+        SHOWALLPOSTS = 1, SHOW, LIKE, CREATEPOST, LOGOUTUSER
+    }
+
+    enum AdminMenuOptions
+    {
+        SHOWALLNOTIFICATION = 5, SHOWNOTIFICATION, REMOVEPOST, LOGOUTADMIN
+    }
+
+    enum LoginMenuOptions
+    {
+        LOGIN = 1, REGISTER, BACK
+    }
+    static class ConsoleInterface
     {
         public static string[] MainMenuOptions { get; set; }
         public static string[] UserMenuOptions { get; set; }
         public static string[] AdminMenuOptions { get; set; }
+        public static string[] LoginMenuOptions { get; set; }
 
-        static SocialNetwork()
+        static ConsoleInterface()
         {
             MainMenuOptions = new string[] 
                 {"Main Menu", "Admin", "User", "Exit"};
             UserMenuOptions = new string[] 
                 {"User", "Show All Posts", "Show", "Like", "Create Post", "Logout"};
             AdminMenuOptions = new string[] 
-                {"Admin", "Show All Posts", "Show All Notification", "Show Notification", "Show Post", "Like", "Create Post", "Remove Post", "Logout"};
+                {"Admin", "Show All Posts", "Show Post", "Like", "Create Post", "Show All Notification", "Show Notification", "Remove Post", "Logout"};
+
+            LoginMenuOptions = new string[]
+                {"Login/Register", "Login", "Register", "Back"};
         }
 
         public static void PrintMenu(in string[] options)
@@ -45,31 +68,11 @@ namespace SocialNetworkV1
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    ClearConsole(length - 1, 10);
+                    Helper.ConsoleHelper.ClearConsole(length - 1, 10);
                 }
             } while (choice < 1 || choice > length);
 
             return choice;
-        }
-
-        public static void ClearConsole(int lineCount, int clearableLine)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Press enter to continue");
-            Console.ResetColor();
-            Console.ReadLine();
-            Console.SetCursorPosition(0, lineCount + clearableLine);
-            for (int i = 0; i < clearableLine; i++)
-            {
-                ClearLastLine();
-            }
-        }
-
-        public static void ClearLastLine()
-        {
-            Console.SetCursorPosition(0, Console.CursorTop - 1);
-            Console.Write(new string(' ', Console.BufferWidth));
-            Console.SetCursorPosition(0, Console.CursorTop - 1);
         }
     }
 }

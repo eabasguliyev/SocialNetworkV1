@@ -6,8 +6,8 @@ namespace Network
     static class Mail
     {
         private static SmtpClient SmtpClient { get; set; }
-        private static string SenderAddress { get; } = "email";
-        private static string SenderPassword{ get; } = "email";
+        private static string SenderAddress { get; } = "gmail.com";
+        private static string SenderPassword{ get; } = "pass";
         static Mail()
         {
             SmtpClient = new SmtpClient("smtp.gmail.com")
@@ -15,6 +15,7 @@ namespace Network
                 Port = 587,
                 Credentials = new NetworkCredential(SenderAddress, SenderPassword),
                 EnableSsl = true,
+                UseDefaultCredentials = true
             };
         }
 
