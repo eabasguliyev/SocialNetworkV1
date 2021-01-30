@@ -52,9 +52,9 @@ namespace Session
     class LoginAccountSession
     {
         public bool Status { get; set; }
-        public User.User User{ get; set; }
+        public object User{ get; set; }
 
-        public void Login(in Database.Database db, UserCredentials credentials)
+        public void LoginAsUser(in Database.Database db, UserCredentials credentials)
         {
             User.User user = null;
 
@@ -71,6 +71,22 @@ namespace Session
             Status = true;
         }
 
+        public void LoginAsAdmin(in Database.Database db, UserCredentials credentials)
+        {
+            Admin.Admin admin = null;
+
+            if (db.Users != null)
+                admin = Array.Find(db.Admins, admin1 => admin1.Username == credentials.Username);
+
+            if (admin == null)
+                throw new LoginException($"There is no account associated this username -> {credentials.Username}");
+
+            if (admin.Password != credentials.Password)
+                throw new LoginException($"Password is wrong!");
+
+            User = admin;
+            Status = true;
+        }
         public void Logout()
         {
             Status = false;

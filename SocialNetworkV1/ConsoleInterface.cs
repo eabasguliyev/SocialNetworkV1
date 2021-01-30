@@ -14,7 +14,7 @@ namespace SocialNetworkV1
 
     enum AdminMenuOptions
     {
-        SHOWALLNOTIFICATION = 5, SHOWNOTIFICATION, REMOVEPOST, LOGOUTADMIN
+        SHOWALLPOSTS = 1, SHOW, SHOWALLNOTIFICATION, SHOWNOTIFICATION, REMOVEPOST, LOGOUTADMIN
     }
 
     enum LoginMenuOptions
@@ -33,9 +33,9 @@ namespace SocialNetworkV1
             MainMenuOptions = new string[] 
                 {"Main Menu", "Admin", "User", "Exit"};
             UserMenuOptions = new string[] 
-                {"User", "Show All Posts", "Show", "Like", "Create Post", "Logout"};
+                {"User", "Show All Posts", "Show Post", "Like", "Create Post", "Logout"};
             AdminMenuOptions = new string[] 
-                {"Admin", "Show All Posts", "Show Post", "Like", "Create Post", "Show All Notification", "Show Notification", "Remove Post", "Logout"};
+                {"Admin", "Show All Posts", "Show Post", "Show All Notification", "Show Notification", "Remove Post", "Logout"};
 
             LoginMenuOptions = new string[]
                 {"Login/Register", "Login", "Register", "Back"};

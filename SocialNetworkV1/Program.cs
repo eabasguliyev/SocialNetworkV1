@@ -26,22 +26,30 @@ namespace SocialNetworkV1
                 {
                     case MainMenuOptions.ADMIN:
                     {
-                        var adminMenuLoop = true;
-                        while (adminMenuLoop)
+                        if (!session.Status)
                         {
-                            ConsoleInterface.PrintMenu(ConsoleInterface.AdminMenuOptions);
+                            Console.Clear();
+                            var userCredentials = new UserCredentials();
 
-                            switch ((AdminMenuOptions)ConsoleInterface.InputChoice(ConsoleInterface.AdminMenuOptions.Length))
+                            Console.Write("Username: ");
+
+                            userCredentials.Username = Console.ReadLine();
+
+                            Console.Write("Password: ");
+
+                            userCredentials.Password = Console.ReadLine();
+                            try
                             {
-                                case AdminMenuOptions.LOGOUTADMIN:
-                                {
-                                    adminMenuLoop = false;
-                                    break;
-                                }
-                                default:
-                                    break;
+                                session.LoginAsAdmin(db, userCredentials);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                Helper.ConsoleHelper.ClearConsole();
+                                continue;
                             }
                         }
+                        AdminSide.AdminSide.Start(ref db, ref session);
                         break;
                     }
                     case MainMenuOptions.USER:
@@ -69,10 +77,10 @@ namespace SocialNetworkV1
                                         Console.Write("Password: ");
 
                                         userCredentials.Password = Console.ReadLine();
-
+                                        
                                         try
                                         {
-                                            session.Login(db, userCredentials);
+                                            session.LoginAsUser(db, userCredentials);
                                         }
                                         catch (Exception e)
                                         {

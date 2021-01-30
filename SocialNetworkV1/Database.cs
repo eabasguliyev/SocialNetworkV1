@@ -169,5 +169,55 @@ namespace Database
 
             throw new DatabaseException($"There is no post associated this id -> {id}");
         }
+
+        public void ShowAllNotifications(bool detail = false)
+        {
+            if (Notifications != null)
+            {
+                if (detail)
+                {
+                    foreach (var notification in Notifications)
+                    {
+                        Console.WriteLine(notification);
+                    }
+                }
+                else
+                {
+                    foreach (var notification in Notifications)
+                    {
+                        notification.ShortInfo();
+                    }
+                }
+            }
+        }
+
+        public Notification.Notification GetNotification(int id)
+        {
+            if (Notifications != null)
+            {
+                foreach (var notification in Notifications)
+                {
+                    if (notification.Id == id)
+                        return notification;
+                }
+            }
+
+            throw new DatabaseException($"THere is no notification associated this id -> {id}");
+        }
+
+        public void DeletePost(int id)
+        {
+            if (Users != null)
+            {
+                var post = GetPost(id);
+                foreach (var user in Users)
+                {
+                    if(user.Username == post.Username)
+                        user.RemovePost(post.Id);
+                }
+            }
+
+            throw new DatabaseException($"There is no post associated this id -> {id}");
+        }
     }
 }

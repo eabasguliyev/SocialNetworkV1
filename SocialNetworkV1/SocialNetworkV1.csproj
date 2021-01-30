@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminSide.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Admin.cs" />
     <Compile Include="Database.cs" />

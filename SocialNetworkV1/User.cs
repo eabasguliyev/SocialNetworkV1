@@ -40,5 +40,24 @@ namespace User
 
             Posts = temp;
         }
+
+        public void RemovePost(int id)
+        {
+            var postIndex = Array.FindIndex(Posts, post => post.Id == id);
+
+            if (postIndex < 0)
+                throw new DatabaseException($"There is no post associated this id -> {id}");
+
+            var temp = new Post.Post[Posts.Length - 1];
+
+            if (temp != null)
+            {
+                Array.Copy(Posts, temp, postIndex);
+                Array.Copy(Posts, postIndex + 1, temp, postIndex, Posts.Length - postIndex - 1);
+            }
+
+            Posts = temp;
+        }
     }
+
 }
