@@ -17,7 +17,15 @@ namespace SocialNetworkV1
                 Activation = true
             };
 
+            var admin = new Admin.Admin
+            {
+                Email = "meroneb305@200cai.com",
+                Username = "admin",
+                Password = "admin"
+            };
             db.AddUser(ref user);
+
+            db.AddAdmin(ref admin);
             var mainMenuLoop = true;
             while (mainMenuLoop)
             {

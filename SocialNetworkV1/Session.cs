@@ -25,9 +25,9 @@ namespace Session
             {
                 db.AddUser(ref user);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

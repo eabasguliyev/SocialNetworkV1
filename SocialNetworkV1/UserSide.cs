@@ -1,5 +1,6 @@
 ﻿using System;
 using Helper;
+using Network;
 using SocialNetworkV1;
 
 namespace UserSide
@@ -57,9 +58,18 @@ namespace UserSide
                                 } 
                             }
                             Console.Clear();
+
                             var post = db.GetPost(id);
                             Console.WriteLine(post);
+                            
                             post.IncreaseView();
+
+                            var newNotf = new Notification.Notification(){FromUser = session.User as User.User, Text= $"{(session.User as User.User).Username} viewed this post [id] ->{post.Id}"};
+
+                            db.AddNotification(ref newNotf);
+
+                            Mail.SendMail(db.Admins[0].Email, "New views!", newNotf.Text);
+
                             ConsoleHelper.ClearConsole();
                         }
                         catch (Exception e)
@@ -98,9 +108,18 @@ namespace UserSide
                             Console.Clear();
                             var post = db.GetPost(id);
                             post++;
+
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
                             Console.WriteLine("Post liked!");
                             Console.ResetColor();
+                            
+                            var newNotf = new Notification.Notification() { FromUser = session.User as User.User, Text = $"{(session.User as User.User).Username} liked this post [id] ->{post.Id}" };
+
+                            db.AddNotification(ref newNotf);
+
+                            Mail.SendMail(db.Admins[0].Email, "New likes!", newNotf.Text);
+                            
+                           
                             ConsoleHelper.ClearConsole();
                         }
                         catch (Exception e)

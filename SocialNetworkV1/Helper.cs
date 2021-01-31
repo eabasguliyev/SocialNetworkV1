@@ -16,9 +16,9 @@ namespace Helper
             {
                 CheckForbiddenCharacter(mail);
             }
-            catch (Exception e)
-            { 
-                throw;
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             var mailComponents = mail.Split('@');
@@ -122,5 +122,4 @@ namespace Helper
             }
         }
     }
-
 }

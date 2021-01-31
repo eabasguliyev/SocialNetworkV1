@@ -130,6 +130,7 @@ namespace Database
                         {
                             isExist = true;
                             Console.WriteLine(userPost);
+                            Console.WriteLine();
                         }
                     }
                 }
@@ -144,6 +145,7 @@ namespace Database
                         {
                             isExist = true;
                             userPost.ShortInfo();
+                            Console.WriteLine();
                         }
                     }
                 }
@@ -172,21 +174,25 @@ namespace Database
 
         public void ShowAllNotifications(bool detail = false)
         {
-            if (Notifications != null)
+            if (Notifications == null)
             {
-                if (detail)
+                throw new DatabaseException("There is no notifications!");
+            }
+
+            if (detail)
+            {
+                foreach (var notification in Notifications)
                 {
-                    foreach (var notification in Notifications)
-                    {
-                        Console.WriteLine(notification);
-                    }
+                    Console.WriteLine(notification);
+                    Console.WriteLine();
                 }
-                else
+            }
+            else
+            {
+                foreach (var notification in Notifications)
                 {
-                    foreach (var notification in Notifications)
-                    {
-                        notification.ShortInfo();
-                    }
+                    notification.ShortInfo();
+                    Console.WriteLine();
                 }
             }
         }
@@ -212,8 +218,11 @@ namespace Database
                 var post = GetPost(id);
                 foreach (var user in Users)
                 {
-                    if(user.Username == post.Username)
+                    if (user.Username == post.Username)
+                    {
                         user.RemovePost(post.Id);
+                        return;
+                    }
                 }
             }
 
