@@ -6,8 +6,8 @@ namespace Network
     static class Mail
     {
         private static SmtpClient SmtpClient { get; set; }
-        private static string SenderAddress { get; } = "valid@gmail.com";
-        private static string SenderPassword{ get; } = "validPassword";
+        private static string SenderAddress { get; } = "email";
+        private static string SenderPassword{ get; } = "password";
         static Mail()
         {
             SmtpClient = new SmtpClient("smtp.gmail.com")
