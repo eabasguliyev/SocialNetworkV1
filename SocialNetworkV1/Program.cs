@@ -21,7 +21,7 @@ namespace SocialNetworkV1
             {
                 Email = "meroneb305@200cai.com",
                 Username = "admin",
-                Password = "admin"
+                Password = Hash.Hash.GetHashSha256("admin")
             };
             db.AddUser(ref user);
 
@@ -38,15 +38,18 @@ namespace SocialNetworkV1
                         if (!session.Status)
                         {
                             Console.Clear();
-                            var userCredentials = new UserCredentials();
+                            string username, password;
+
 
                             Console.Write("Username: ");
 
-                            userCredentials.Username = Console.ReadLine();
+                            username = Console.ReadLine();
 
                             Console.Write("Password: ");
 
-                            userCredentials.Password = Console.ReadLine();
+                            password = Console.ReadLine();
+                            
+                            var userCredentials = new UserCredentials(ref username, ref password);
                             try
                             {
                                 session.LoginAsAdmin(db, userCredentials);
@@ -77,16 +80,19 @@ namespace SocialNetworkV1
                                     if (!session.Status)
                                     {
                                         Console.Clear();
-                                        var userCredentials = new UserCredentials();
+                                        string username, password;
+
 
                                         Console.Write("Username: ");
 
-                                        userCredentials.Username = Console.ReadLine();
+                                        username = Console.ReadLine();
 
                                         Console.Write("Password: ");
 
-                                        userCredentials.Password = Console.ReadLine();
-                                        
+                                        password = Console.ReadLine();
+
+                                        var userCredentials = new UserCredentials(ref username, ref password);
+
                                         try
                                         {
                                             session.LoginAsUser(db, userCredentials);
