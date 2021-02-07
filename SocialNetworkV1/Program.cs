@@ -21,7 +21,7 @@ namespace SocialNetworkV1
             {
                 Email = "meroneb305@200cai.com",
                 Username = "admin",
-                Password = Hash.Hash.GetHashSha256("admin")
+                Password = "admin"
             };
             db.AddUser(ref user);
 
